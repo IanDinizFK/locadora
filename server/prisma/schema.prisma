@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
+
+model Produto {
+  id String @id @default(uuid())
+  codigo String
+  title String
+  price Int
+  
+
+  @@map("produtos")
+}
+
+model Cliente {
+  id    Int     @default(autoincrement()) @id
+  email String  @unique
+  name  String
+  rg String
+  cpf String
+  address String
+  city String
+  tel String
+  profession String
+
+  posts Alugueis[]
+  @@map("Clientes")
+}
+
+model Alugueis {
+  id        Int     @default(autoincrement()) @id
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    Cliente  @relation(fields: [authorId], references: [id])
+  authorId  Int 
+
+  @@map("Alugueis")
+}
+
