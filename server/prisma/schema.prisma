@@ -26,17 +26,16 @@ model Produto {
 }
 
 model Cliente {
-  id    Int     @default(autoincrement()) @id
+  id    String     @id @default(uuid())
   email String  @unique
   name  String
-  rg String
-  cpf String
+  rg String @unique
+  cpf String @unique
   address String
   city String
   tel String
   profession String
 
-  posts Alugueis[]
   @@map("Clientes")
 }
 
@@ -45,7 +44,7 @@ model Alugueis {
   title     String
   content   String?
   published Boolean @default(false)
-  author    Cliente  @relation(fields: [authorId], references: [id])
+  author    String //Alterar para relação futuramente
   authorId  Int 
 
   @@map("Alugueis")
