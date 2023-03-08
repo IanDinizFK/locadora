@@ -1,8 +1,26 @@
 import React from 'react';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import '../styles/btnDelete.css';
+import { api } from '../lib/axios';
 
-export function BtnDelete(){
+interface userDelete{
+  id: string
+}
+
+export function BtnDelete({id}: userDelete){
+
+  function deleteUser(idDel: string){
+    if(idDel){
+      api.delete('/delete/'+idDel).then(() =>{
+        alert("Usuario deletado com sucesso!")
+        window.location.reload();
+      });
+    }else{
+      alert("ID não encontrado!!")
+    }
+    
+  }
+
     return(
             <AlertDialog.Root>
               <AlertDialog.Trigger asChild>
@@ -20,13 +38,12 @@ export function BtnDelete(){
                       <button className="Button mauve">Cancelar</button>
                     </AlertDialog.Cancel>
                     <AlertDialog.Action asChild>
-                      <button className="Button red">Sim, deletar a conta</button>
+                      <button className="Button red" onClick={() => deleteUser(id)}>Sim, deletar a conta</button>
                     </AlertDialog.Action>
                   </div>
                 </AlertDialog.Content>
               </AlertDialog.Portal>
             </AlertDialog.Root>
-            
           
     )
 }

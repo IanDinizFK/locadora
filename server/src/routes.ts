@@ -93,16 +93,16 @@ export async function appRoutes(app: FastifyInstance){
     })
 
     //deletar cliente
-    app.delete('/delete', async (request, reply) => {
-        const getCpf = z.object({
-            cpf: z.string()
+    app.delete('/delete/:id', async (request) => {
+
+        const getId = z.object({
+            id: z.string()
         })
 
-        const { cpf} = getCpf.parse(request.query)
+        const {id} = getId.parse(request.params)
         await prisma.cliente.deleteMany({
-            where: {cpf: cpf}
+            where: {id: id}
         });
-        reply.send('Cliente removido')
           
     })
 
