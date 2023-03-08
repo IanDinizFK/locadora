@@ -21,21 +21,22 @@ interface UserInfo {
 }
 
 export function BtnEdit(props: any) {
+  
   const [userInfo, setUserInfo] = useState({...props});
   useEffect(() => {
     setUserInfo({ ...props });
   }, [props]);
+
   async function attUserInfo(event: FormEvent) {
-    
-    
-    console.log("CHAMOU")
-    console.log(userInfo)
 
-    /** await api.post('/upClient/' + id + '/', {
-       userInfo
-     }) */
+     try {
+      const response = await api.patch('/upClient/'+userInfo.id+'/', userInfo)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
 
-    alert('Hábito Criado com sucesso');
+    window.location.reload()
   }
 
 

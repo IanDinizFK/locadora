@@ -52,6 +52,7 @@ export async function appRoutes(app: FastifyInstance){
             profession: z.string()
         })
         const {email, name, rg, cpf, address, city, tel, profession} = upClient.parse(request.body)
+        console.log(upClient)
         const cliente = await prisma.cliente.update({
             where:{ 
                 id: id
@@ -62,8 +63,8 @@ export async function appRoutes(app: FastifyInstance){
                 rg: rg,
                 cpf: cpf,
                 tel: tel,
-                address: address,
                 city: city,
+                address: address,
                 profession: profession,
             }
             
