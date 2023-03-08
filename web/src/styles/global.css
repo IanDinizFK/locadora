@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+@import '@radix-ui/colors/blackA.css';
+
+input {
+  all: unset;
+}
+
+.Input {
+  width: 200px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 0 10px;
+  height: 35px;
+  font-size: 15px;
+  line-height: 1;
+  color: black;
+  border: solid 2px;
+  background-color: var(--blackA5);
+  box-shadow: 0 0 0 1px var(--blackA9);
+}
+
+.Input:focus {
+  box-shadow: 0 0 0 1px purple;
+}

@@ -7,18 +7,7 @@ import { api } from '../lib/axios';
 
 
 
-interface UserInfo {
-  id: string;
-  email: string;
-  name: string;
-  cpf: string;
-  rg: string;
-  address: string;
-  city: string;
-  tel: string;
-  profession: string;
 
-}
 
 export function BtnEdit(props: any) {
   
@@ -32,11 +21,12 @@ export function BtnEdit(props: any) {
      try {
       const response = await api.patch('/upClient/'+userInfo.id+'/', userInfo)
       console.log(response.data)
+      window.location.reload()
     } catch (error) {
       console.log(error)
     }
 
-    window.location.reload()
+    
   }
 
 
@@ -62,7 +52,6 @@ export function BtnEdit(props: any) {
                 Nome
               </label>
               <input className="Input" id="name" value={userInfo.name} onChange={event => setUserInfo({ ...userInfo, name: event.target.value })} />
-              
             </fieldset>
             <fieldset className="Fieldset">
               <label className="Label" htmlFor="email">
@@ -102,7 +91,7 @@ export function BtnEdit(props: any) {
             </fieldset>
             <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }}>
               <Dialog.Close asChild>
-                <button className="Button green w-screen h-screen" onClick={attUserInfo}>Salvar alterações</button>
+                <button className="Button green w-screen h-screen" disabled={true} onClick={attUserInfo}>Salvar alterações</button>
               </Dialog.Close>
             </div>
           <Dialog.Close className="absolute right-6 top-6 text-zinc-400 rounded-lg focus:ring-2 focus:ring-violet-600 focus:ring-offset-2 focus:ring-offset-zinc-900">
